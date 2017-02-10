@@ -144,6 +144,22 @@ class AnimateResize(object):
         draw_options = pymunk.pygame_util.DrawOptions(screen2)
         return (screen,screen2,draw_options)
 
+
+class ImageDraw(object):
+    def __init__(self,fname,point):
+        print(fname)
+        self.img = pygame.image.load(fname).convert()
+        self.point=point
+    def in_rect(self,point,surface):
+        w=surface.get_width()
+        h=surface.get_height()
+        x=self.point[0] - point[0]
+        y=point[1]
+        if 0 < x < w:
+            pt=pymunk.pygame_util.to_pygame((x,y),surface)
+            surface.blit(self.img,pt)
+
+
 def main():
     global point
     (screen,screen2,clock,space) = init()
@@ -155,6 +171,14 @@ def main():
     add_ball(space,200)
     add_ball(space,150)
     add_ball(space,100)
+    img_draws=[]
+    fname=("images.bmp","kendo.bmp","propose2.bmp",\
+        "wedding.bmp","rumia.bmp","smile.bmp",)
+    for i,f in enumerate(fname):
+        path="img/"+f
+        x=(i+1)*1000
+        y=50
+        img_draws.append(ImageDraw(path,(x,y)))
     bodies=space.bodies
     bodies=sorted(bodies,key=lambda x:x.position.x,reverse=True)
     for i,a in enumerate(bodies):
@@ -214,6 +238,9 @@ def main():
             pt=pymunk.pygame_util.to_pygame(point,screen2)
             pygame.draw.circle(screen2, THECOLORS["red"], pt, 20, 0)
             point = None
+        for i in img_draws:
+            i.in_rect((camera_x,50),screen2)
+
         #p2=(600,600)
         #if p2:
         #    pt=pymunk.pygame_util.to_pygame(p2,screen2)
