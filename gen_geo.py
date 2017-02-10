@@ -8,7 +8,7 @@ import json
 import numpy as np
 import pandas as pd
 
-def gen():
+def gen_building():
     xs=[]
     ys=[]
     for i,x in enumerate(range(500)):
@@ -16,7 +16,7 @@ def gen():
         c=np.radians(d)
         y=math.sin(c)
         y=y*100
-        y=y+random.normalvariate(0,150)
+        y=y+random.normalvariate(0,120)
         y=abs(y)
         ys.append(y)
         xs.append(x*30)
@@ -32,12 +32,18 @@ def gen():
     return (xs,ys)
 def gen_json(xs,ys):
     t=[dict(x=x,y=y) for (x,y) in zip(xs,ys)]
-    outf=open('out3.json','wb')
+    outf=open('out4.json','wb')
     s=json.dumps(t)
     outf.write(s.encode('utf-8'))
     #print(s)
     outf.close()
+
+
+
+
+
+
 def main():
-    (xs,ys)=gen()
-    gen_json(xs,ys)
+    #(xs,ys)=gen_building()
+    #gen_json(xs,ys)
 if __name__=='__main__':main()

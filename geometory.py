@@ -173,12 +173,13 @@ def main():
     add_ball(space,100)
     img_draws=[]
     fname=("images.bmp","kendo.bmp","propose2.bmp",\
-        "wedding.bmp","rumia.bmp","smile.bmp",)
+        "wedding.bmp","rumia.bmp","smile.bmp",)*4
     for i,f in enumerate(fname):
         path="img/"+f
         x=(i+4)*1000
         y=50
         img_draws.append(ImageDraw(path,(x,y)))
+    print(len(img_draws))
     bodies=space.bodies
     bodies=sorted(bodies,key=lambda x:x.position.x,reverse=True)
     for i,a in enumerate(bodies):
