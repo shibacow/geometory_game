@@ -176,7 +176,7 @@ def main():
         "wedding.bmp","rumia.bmp","smile.bmp",)
     for i,f in enumerate(fname):
         path="img/"+f
-        x=(i+1)*1000
+        x=(i+4)*1000
         y=50
         img_draws.append(ImageDraw(path,(x,y)))
     bodies=space.bodies
@@ -190,7 +190,7 @@ def main():
     constraints = space.constraints
     back_recouce=get_resource(space,screen2)
     camera_x=0
-    verocity=3
+    verocity=2
     ar=None
     ch = space.add_collision_handler(0, 0)
     ch.data["surface"] = screen2
